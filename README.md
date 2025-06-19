@@ -16,6 +16,7 @@
 
 <p align="center">
 
+At the root of the project, run
   
   ```bash
      npm start
@@ -26,7 +27,25 @@
 
 <p align="center">
 
+At the root of the project, run: 
+
   ```bash
       ./mvn
  ```
+</p>
+
+<h2 align="center">Used technologies</h2>
+
+<p align="center">
+
+   - Java 21
+   - Spring Boot 3
+   - TypeScript
+   - Angular 17
+   - MySQL 8
+   - Docker/Docker Compose
+   - Grafana
+   - Prometheus
+   - JHipster
+
 </p>
