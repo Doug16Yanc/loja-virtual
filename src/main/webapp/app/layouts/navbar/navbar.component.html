@@ -1,4 +1,4 @@
-<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
+<!--<nav data-cy="navbar" class="navbar navbar-dark navbar-expand-md bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand logo" routerLink="/" (click)="collapseNavbar()">
       <span class="logo-img"></span>
@@ -27,7 +27,7 @@
             </span>
           </a>
         </li>
-        <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
+        jhipster-needle-add-element-to-menu - JHipster will add new menu items here
         @if (account() !== null) {
           <li
             ngbDropdown
@@ -43,7 +43,55 @@
               </span>
             </a>
             <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="entity-menu">
-              <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/produto"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.produto">Produto</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/cliente"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.cliente">Cliente</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/pedido"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.pedido">Pedido</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  routerLink="/item-pedido"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="collapseNavbar()"
+                >
+                  <fa-icon icon="asterisk" [fixedWidth]="true"></fa-icon>
+                  <span jhiTranslate="global.menu.entities.itemPedido">Item Pedido</span>
+                </a>
+              </li>
+               jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here
             </ul>
           </li>
         }
@@ -74,7 +122,7 @@
                 <span jhiTranslate="global.menu.entities.adminAuthority">Authority</span>
               </a>
             </li>
-            <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+             jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here
             <li>
               <a class="dropdown-item" routerLink="/admin/user-management" routerLinkActive="active" (click)="collapseNavbar()">
                 <fa-icon icon="users" [fixedWidth]="true"></fa-icon>
@@ -145,21 +193,21 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          @let accountRef = account();
+          &#64;let accountRef = account();
           <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu" data-cy="accountMenu">
-            @if (!accountRef?.imageUrl) {
+            @if (!account?.imageUrl) {
               <span>
                 <fa-icon icon="user"></fa-icon>
                 <span jhiTranslate="global.menu.account.main">Account</span>
               </span>
             } @else {
               <span>
-                <img [src]="accountRef!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
+                <img [src]="account!.imageUrl" class="profile-image rounded-circle" alt="Avatar" />
               </span>
             }
           </a>
           <ul class="dropdown-menu" ngbDropdownMenu aria-labelledby="account-menu">
-            @if (accountRef !== null) {
+            @if (account !== null) {
               <li>
                 <a
                   class="dropdown-item"
@@ -215,4 +263,31 @@
       </ul>
     </div>
   </div>
+</nav> -->
+
+<nav class="navbar">
+  <div class="navbar__initial">
+    <div class="navbar__initial__logo">
+      <img src="/content/images/assets/images/logo.png" alt="Logo" />
+    </div>
+    <div class="navbar__initial__title">Broadleaf Commerce</div>
+  </div>
+
+  <ul class="navbar__links">
+    <li *ngIf="!isLoggedIn" class="navbar__dropdown">
+      <button class="navbar__button" (click)="toggleDropdown($event)">LOGIN</button>
+      <div class="dropdown__menu" *ngIf="showDropdown">
+        <a (click)="login()">Administrator</a>
+        <a (click)="login()">Customer</a>
+      </div>
+    </li>
+
+    <ng-container *ngIf="isLoggedIn">
+      <li><a routerLink="/">Home</a></li>
+      <li><a routerLink="/produto">Products</a></li>
+      <li><a routerLink="/pedido">Orders</a></li>
+      <li><a routerLink="/cliente">Customers</a></li>
+      <li><button class="navbar__button" (click)="logout()">LOGOUT</button></li>
+    </ng-container>
+  </ul>
 </nav>

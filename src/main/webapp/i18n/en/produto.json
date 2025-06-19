@@ -1,0 +1,27 @@
+{
+  "lojaVirtualApp": {
+    "produto": {
+      "home": {
+        "title": "Products",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new product",
+        "createOrEditLabel": "Create or edit a Produto",
+        "notFound": "No Produtos found"
+      },
+      "created": "A new Produto is created with identifier {{ param }}",
+      "updated": "A Produto is updated with identifier {{ param }}",
+      "deleted": "A Produto is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Produto {{ id }}?"
+      },
+      "detail": {
+        "title": "Product"
+      },
+      "id": "ID",
+      "nome": "Name",
+      "preco": "Price",
+      "descricao": "Description",
+      "quantidade": "Quantity"
+    }
+  }
+}

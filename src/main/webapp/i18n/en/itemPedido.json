@@ -1,0 +1,27 @@
+{
+  "lojaVirtualApp": {
+    "itemPedido": {
+      "home": {
+        "title": "Orders item",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new order item",
+        "createOrEditLabel": "Create or edit a order item",
+        "notFound": "No ordem items found"
+      },
+      "created": "A new ordem item is created with identifier {{ param }}",
+      "updated": "A order item is updated with identifier {{ param }}",
+      "deleted": "A order item is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete order item {{ id }}?"
+      },
+      "detail": {
+        "title": "Order item"
+      },
+      "id": "ID",
+      "quantidade": "Quantity",
+      "precoUnitario": "Unit price",
+      "produto": "Product",
+      "pedido": "Order"
+    }
+  }
+}

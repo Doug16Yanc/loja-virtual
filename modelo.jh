@@ -1,0 +1,31 @@
+// Entidades Básicas
+entity Produto {
+    nome String required,
+    preco BigDecimal required min(0),
+    descricao String,
+    quantidade Integer
+}
+
+entity Cliente {
+    nome String required,
+    email String required pattern(/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/),
+    telefone String
+}
+
+entity Pedido {
+    dataInstant Instant required,
+    statusPedido String required
+}
+
+entity ItemPedido {
+    quantidade Integer required min(1),
+    precoUnitario BigDecimal required min(0)
+}
+
+relationship ManyToOne {
+    ItemPedido{produto} to Produto,
+    ItemPedido{pedido} to Pedido,
+    Pedido{cliente} to Cliente
+}
+
+paginate Produto, Cliente, Pedido, ItemPedido with pagination

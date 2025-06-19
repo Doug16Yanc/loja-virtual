@@ -1,0 +1,37 @@
+{
+  "annotations": {
+    "changelogDate": "20250614182051"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "quantidade",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "1"
+    },
+    {
+      "fieldName": "precoUnitario",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required", "min"],
+      "fieldValidateRulesMin": "0"
+    }
+  ],
+  "name": "ItemPedido",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "produto",
+      "relationshipName": "produto",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "pedido",
+      "relationshipName": "pedido",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

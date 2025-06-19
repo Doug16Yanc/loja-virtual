@@ -1,5 +1,4 @@
 # This configuration is intended for development purpose, it's **your** responsibility to harden it for production
-name: lojavirtual
 services:
   mysql:
     image: mysql:9.2.0

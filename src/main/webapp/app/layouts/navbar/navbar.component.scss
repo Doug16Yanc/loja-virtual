@@ -4,7 +4,7 @@
 /* ==========================================================================
 Navbar
 ========================================================================== */
-
+/*
 .navbar-version {
   font-size: 0.65em;
   color: $navbar-dark-color;
@@ -17,6 +17,7 @@ Navbar
 
 .navbar {
   padding: 0.2rem 1rem;
+  background: #00d084;
 
   a.nav-link {
     font-weight: 400;
@@ -25,7 +26,7 @@ Navbar
 
 /* ==========================================================================
 Logo styles
-========================================================================== */
+==========================================================================
 .logo-img {
   height: 45px;
   width: 45px;
@@ -33,4 +34,107 @@ Logo styles
   vertical-align: middle;
   background: url('/content/images/logo-jhipster.png') no-repeat center center;
   background-size: contain;
+} */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 1rem 1.5rem;
+  background-color: #001708;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+
+  &__initial {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    &__logo img {
+      height: 40px;
+    }
+    &__title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #00d084;
+    }
+  }
+
+  &__links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    li a {
+      color: #00d084;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition:
+        background 0.3s,
+        color 0.3s;
+
+      &:hover {
+        color: white;
+      }
+
+      &.active {
+        color: white;
+      }
+    }
+  }
+
+  &__dropdown {
+    position: relative;
+  }
+
+  .dropdown__menu {
+    position: absolute;
+    top: 100%;
+    right: 2%;
+    background-color: #001708;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+
+    a {
+      padding: 10px;
+      color: white;
+      font-size: 14px;
+      text-decoration: none;
+      transition: background 0.3s;
+
+      &:hover {
+        background-color: #93c5fd;
+      }
+    }
+  }
+
+  &__button {
+    width: 200px;
+    height: 50px;
+    background-color: #038c33;
+    color: black;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition:
+      background 0.3s,
+      color 0.3s;
+    border: none;
+
+    &:hover {
+      color: #93c5fd;
+    }
+  }
 }

@@ -60,6 +60,58 @@ Generic styles
   border-left: 5px solid green;
 }
 
+.btn-info {
+  background-color: #b2df00;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #038c33;
+    color: white;
+  }
+}
+
+.btn-primary {
+  background-color: #038c33;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #038c33;
+    color: white;
+  }
+}
+
+.btn-secondary {
+  background-color: #00d084;
+  border-radius: 10px;
+  color: black;
+  font-weight: bold;
+
+  &:hover {
+    background-color: #b2df00;
+    color: white;
+  }
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content-wrap {
+  flex: 1;
+}
+
 .ng-invalid:not(form) {
   border-left: 5px solid red;
 }
@@ -101,10 +153,6 @@ Generic styles
 .readonly {
   background-color: #eee;
   opacity: 1;
-}
-
-.footer {
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 
 .hand,
@@ -227,6 +275,8 @@ angular-cli removes postcss-rtl processed inline css, processed rules must be ad
 
 /* navbar.component.scss */
 .navbar {
+  background: #00d084;
+  color: white;
   ul.navbar-nav {
     .nav-item {
       margin-left: 0.5em;

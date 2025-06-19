@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (itemPedido(); as itemPedidoRef) {
+      <div>
+        <h2 data-cy="itemPedidoDetailsHeading"><span jhiTranslate="lojaVirtualApp.itemPedido.detail.title">Item Pedido</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ itemPedidoRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="lojaVirtualApp.itemPedido.quantidade">Quantidade</span></dt>
+          <dd>
+            <span>{{ itemPedidoRef.quantidade }}</span>
+          </dd>
+          <dt><span jhiTranslate="lojaVirtualApp.itemPedido.precoUnitario">Preco Unitario</span></dt>
+          <dd>
+            <span>{{ itemPedidoRef.precoUnitario }}</span>
+          </dd>
+          <dt><span jhiTranslate="lojaVirtualApp.itemPedido.produto">Produto</span></dt>
+          <dd>
+            @if (itemPedido()!.produto) {
+              <div>
+                <a [routerLink]="['/produto', itemPedido()!.produto?.id, 'view']">{{ itemPedidoRef.produto?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="lojaVirtualApp.itemPedido.pedido">Pedido</span></dt>
+          <dd>
+            @if (itemPedido()!.pedido) {
+              <div>
+                <a [routerLink]="['/pedido', itemPedido()!.pedido?.id, 'view']">{{ itemPedidoRef.pedido?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/item-pedido', itemPedidoRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

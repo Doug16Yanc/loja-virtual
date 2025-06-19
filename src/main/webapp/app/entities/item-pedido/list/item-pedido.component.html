@@ -1,0 +1,137 @@
+<div>
+  <h2 id="page-heading" data-cy="ItemPedidoHeading">
+    <span jhiTranslate="lojaVirtualApp.itemPedido.home.title">Item Pedidos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="lojaVirtualApp.itemPedido.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-item-pedido"
+        [routerLink]="['/item-pedido/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="lojaVirtualApp.itemPedido.home.createLabel">Create a new Item Pedido</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (itemPedidos().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="lojaVirtualApp.itemPedido.home.notFound">No Item Pedidos found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="quantidade">
+              <div class="d-flex">
+                <span jhiTranslate="lojaVirtualApp.itemPedido.quantidade">Quantidade</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="precoUnitario">
+              <div class="d-flex">
+                <span jhiTranslate="lojaVirtualApp.itemPedido.precoUnitario">Preco Unitario</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="produto.id">
+              <div class="d-flex">
+                <span jhiTranslate="lojaVirtualApp.itemPedido.produto">Produto</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="pedido.id">
+              <div class="d-flex">
+                <span jhiTranslate="lojaVirtualApp.itemPedido.pedido">Pedido</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (itemPedido of itemPedidos(); track trackId(itemPedido)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/item-pedido', itemPedido.id, 'view']">{{ itemPedido.id }}</a>
+              </td>
+              <td>{{ itemPedido.quantidade }}</td>
+              <td>{{ itemPedido.precoUnitario }}</td>
+              <td>
+                @if (itemPedido.produto) {
+                  <div>
+                    <a [routerLink]="['/produto', itemPedido.produto.id, 'view']">{{ itemPedido.produto.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @if (itemPedido.pedido) {
+                  <div>
+                    <a [routerLink]="['/pedido', itemPedido.pedido.id, 'view']">{{ itemPedido.pedido.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/item-pedido', itemPedido.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/item-pedido', itemPedido.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(itemPedido)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+  @if (itemPedidos().length > 0) {
+    <div>
+      <div class="d-flex justify-content-center">
+        <jhi-item-count [params]="{ page, totalItems, itemsPerPage }" />
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <ngb-pagination
+          [collectionSize]="totalItems"
+          [page]="page"
+          [pageSize]="itemsPerPage"
+          [maxSize]="5"
+          [rotate]="true"
+          [boundaryLinks]="true"
+          (pageChange)="navigateToPage($event)"
+        ></ngb-pagination>
+      </div>
+    </div>
+  }
+</div>

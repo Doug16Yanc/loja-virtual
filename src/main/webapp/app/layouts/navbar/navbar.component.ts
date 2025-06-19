@@ -19,6 +19,7 @@ import NavbarItem from './navbar-item.model';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
   imports: [RouterModule, SharedModule, HasAnyAuthorityDirective, ActiveMenuDirective],
+  standalone: true,
 })
 export default class NavbarComponent implements OnInit {
   inProduction?: boolean;
@@ -26,8 +27,10 @@ export default class NavbarComponent implements OnInit {
   languages = LANGUAGES;
   openAPIEnabled?: boolean;
   version = '';
-  account = inject(AccountService).trackCurrentAccount();
+  account = inject(AccountService).trackCurrentAccount(); // Signal<Account | null>
   entitiesNavbarItems: NavbarItem[] = [];
+
+  showDropdown = false;
 
   private readonly loginService = inject(LoginService);
   private readonly translateService = inject(TranslateService);
@@ -50,6 +53,15 @@ export default class NavbarComponent implements OnInit {
     });
   }
 
+  get isLoggedIn(): boolean {
+    return this.account() !== null;
+  }
+
+  toggleDropdown(event: Event): void {
+    event.preventDefault();
+    this.showDropdown = !this.showDropdown;
+  }
+
   changeLanguage(languageKey: string): void {
     this.stateStorageService.storeLocale(languageKey);
     this.translateService.use(languageKey);
@@ -70,6 +82,6 @@ export default class NavbarComponent implements OnInit {
   }
 
   toggleNavbar(): void {
-    this.isNavbarCollapsed.update(isNavbarCollapsed => !isNavbarCollapsed);
+    this.isNavbarCollapsed.update(value => !value);
   }
 }

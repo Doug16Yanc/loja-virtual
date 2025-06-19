@@ -50,6 +50,10 @@ public class CacheConfiguration {
             createCache(cm, lojavirtual.domain.User.class.getName());
             createCache(cm, lojavirtual.domain.Authority.class.getName());
             createCache(cm, lojavirtual.domain.User.class.getName() + ".authorities");
+            createCache(cm, lojavirtual.domain.Produto.class.getName());
+            createCache(cm, lojavirtual.domain.Cliente.class.getName());
+            createCache(cm, lojavirtual.domain.Pedido.class.getName());
+            createCache(cm, lojavirtual.domain.ItemPedido.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

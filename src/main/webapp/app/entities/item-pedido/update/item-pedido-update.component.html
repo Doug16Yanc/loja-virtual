@@ -1,0 +1,136 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-item-pedido-heading"
+        data-cy="ItemPedidoCreateUpdateHeading"
+        jhiTranslate="lojaVirtualApp.itemPedido.home.createOrEditLabel"
+      >
+        Create or edit a Item Pedido
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="lojaVirtualApp.itemPedido.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let quantidadeRef = editForm.get('quantidade')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_quantidade" jhiTranslate="lojaVirtualApp.itemPedido.quantidade">Quantidade</label>
+          <input
+            type="number"
+            class="form-control"
+            name="quantidade"
+            id="field_quantidade"
+            data-cy="quantidade"
+            formControlName="quantidade"
+          />
+          @if (quantidadeRef.invalid && (quantidadeRef.dirty || quantidadeRef.touched)) {
+            <div>
+              @if (editForm.get('quantidade')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('quantidade')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '1' }"
+                  >This field should be at least 1.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('quantidade')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        @let precoUnitarioRef = editForm.get('precoUnitario')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_precoUnitario" jhiTranslate="lojaVirtualApp.itemPedido.precoUnitario">Preco Unitario</label>
+          <input
+            type="number"
+            class="form-control"
+            name="precoUnitario"
+            id="field_precoUnitario"
+            data-cy="precoUnitario"
+            formControlName="precoUnitario"
+          />
+          @if (precoUnitarioRef.invalid && (precoUnitarioRef.dirty || precoUnitarioRef.touched)) {
+            <div>
+              @if (editForm.get('precoUnitario')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('precoUnitario')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '0' }"
+                  >This field should be at least 0.</small
+                >
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('precoUnitario')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_produto" jhiTranslate="lojaVirtualApp.itemPedido.produto">Produto</label>
+          <select
+            class="form-control"
+            id="field_produto"
+            data-cy="produto"
+            name="produto"
+            formControlName="produto"
+            [compareWith]="compareProduto"
+          >
+            <option [ngValue]="null"></option>
+            @for (produtoOption of produtosSharedCollection; track $index) {
+              <option [ngValue]="produtoOption">{{ produtoOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_pedido" jhiTranslate="lojaVirtualApp.itemPedido.pedido">Pedido</label>
+          <select
+            class="form-control"
+            id="field_pedido"
+            data-cy="pedido"
+            name="pedido"
+            formControlName="pedido"
+            [compareWith]="comparePedido"
+          >
+            <option [ngValue]="null"></option>
+            @for (pedidoOption of pedidosSharedCollection; track $index) {
+              <option [ngValue]="pedidoOption">{{ pedidoOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
