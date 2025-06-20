@@ -30,7 +30,7 @@ At the root of the project, run
 At the root of the project, run: 
 
   ```bash
-      ./mvn
+      ./mvnw
  ```
 </p>
 
